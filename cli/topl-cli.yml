@@ -1,0 +1,40 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  Maven Central metadata for co.topl:brambl-cli_2.13 (repo1.maven.org, read 2026-08-30) and the
+  archived quickstart in github.com/Topl/Knowledge-Base
+  (docs/Developers/02-Quickstart Tutorial/01-setup.md).
+name: brambl-cli
+description: >-
+  Topl's first-party command line client for the Apparatus (Topl) blockchain — wallet
+  management, address handling, balance queries and transaction submission against a Bifrost
+  node over gRPC.
+official: true
+version: 2.0.0-beta6
+published: '2024-07-15'
+distribution:
+  registry: maven
+  coordinates: co.topl:brambl-cli_2.13
+  url: https://repo1.maven.org/maven2/co/topl/brambl-cli_2.13/
+connectivity:
+  flags:
+  - {flag: '--host', purpose: 'target node host', documented_value: 'testnet.topl.tech (NXDOMAIN when probed 2026-08-30)'}
+  - {flag: '--port', purpose: 'target node port', documented_value: '443'}
+  - {flag: '--secure / -s', purpose: 'use TLS over the connection'}
+  - {flag: '--walletdb', purpose: 'path to the local wallet database'}
+  - {flag: '--from-address', purpose: 'the address to operate on'}
+  self_hosted_alternative: 'docker run --rm -p 9085:9085 -p 9084:9084 docker.io/toplprotocol/bifrost-node:<version>'
+commands:
+- group: wallet
+  documented_flows:
+  - {name: initialize-wallet, purpose: 'create a wallet and key material'}
+  - {name: current-address, purpose: 'print the wallet''s current address for receiving funds'}
+  - {name: balance, purpose: 'check the balance of an address', example: 'brambl-cli wallet balance --from-address <addr> --walletdb $WALLET --host <host> --port 443 -s true'}
+  note: >-
+    Only the flows named in the surviving quickstart are listed. The full command reference
+    lived at topl.github.io/brambl-cli/docs/current/, which returned 404 when probed on
+    2026-08-30, so no further commands are asserted.
+docs:
+  reference: https://topl.github.io/brambl-cli/docs/current/
+  reference_status: 404
+  surviving: https://github.com/Topl/Knowledge-Base

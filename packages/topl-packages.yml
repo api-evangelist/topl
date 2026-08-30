@@ -1,0 +1,290 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  registry.npmjs.org, repo1.maven.org/maven2/co/topl/, pub.dev/api/packages, and
+  hub.docker.com/v2/repositories/toplprotocol — each queried unauthenticated on 2026-08-30.
+  Package identity cross-checked against Topl's own archived developer documentation
+  (github.com/Topl/Knowledge-Base, docs/Developers/Maven Packages/maven.md, which names
+  central.sonatype.com/namespace/co.topl as the release location).
+name: Topl / Apparatus client libraries and distributions
+description: >-
+  Brambl is Topl's family of first-party web3 SDKs (Scala, TypeScript, JavaScript, Dart) plus
+  the brambl-cli command line client and the Bifrost node container images. The 2.x line is
+  branded Apparatus; the 1.x line is branded Topl.
+currency_finding: >-
+  Every first-party distribution is stalled. The newest release across all four registries is
+  Maven co.topl 2.0.0-beta8 on 2024-07-15, and the newest artifact of any kind is the
+  toplprotocol/bifrost-node container tag pushed 2024-09-26. Nothing has shipped in roughly
+  two years, and the 2.x line never left beta.
+packages:
+- name: co.topl:brambl-sdk_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/brambl-sdk_2.13/
+  language: scala
+  official: true
+  version: 2.0.0-beta8
+  published: '2024-07-15'
+  note: Primary Scala SDK for the Apparatus (Topl) blockchain. Never left beta.
+- name: co.topl:brambl-cli_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/brambl-cli_2.13/
+  language: scala
+  official: true
+  version: 2.0.0-beta6
+  published: '2024-07-15'
+  note: The brambl-cli command line client. See cli/topl-cli.yml.
+- name: co.topl:service-kit_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/service-kit_2.13/
+  language: scala
+  official: true
+  version: 2.0.0-beta8
+  published: '2024-07-15'
+- name: co.topl:crypto_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/crypto_2.13/
+  language: scala
+  official: true
+  version: 2.0.0-beta8
+  published: '2024-07-15'
+- name: co.topl:quivr4s_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/quivr4s_2.13/
+  language: scala
+  official: true
+  version: 2.0.0-beta8
+  published: '2024-07-15'
+  note: Scala implementation of the Quivr proposition/proof language.
+- name: co.topl:shared_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/shared_2.13/
+  language: scala
+  official: true
+  version: 2.0.0-beta6
+  published: '2024-07-15'
+- name: co.topl:protobuf-fs2_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/protobuf-fs2_2.13/
+  language: scala
+  official: true
+  version: 2.0.0-beta3
+  published: '2024-05-30'
+  note: Scala bindings compiled from the protobuf specs saved in grpc/.
+- name: co.topl:protobuf-fs2_3
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/protobuf-fs2_3/
+  language: scala
+  official: true
+  version: 2.0.0-beta3
+  published: '2024-05-30'
+- name: co.topl:topl-btc-bridge_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/topl-btc-bridge_2.13/
+  language: scala
+  official: true
+  version: 0.2.0-alpha0
+  published: '2024-05-31'
+  note: Bitcoin bridge for the Thunder L2 work.
+- name: co.topl:topl-btc-cli_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/topl-btc-cli_2.13/
+  language: scala
+  official: true
+  version: 0.2.0-alpha0
+  published: '2024-05-31'
+- name: co.topl:topl-rpc_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/topl-rpc_2.13/
+  language: scala
+  official: true
+  version: 1.10.2
+  published: '2022-03-14'
+  note: Legacy 1.x JSON-RPC client for the pre-Apparatus Topl chain. Superseded by the gRPC contract.
+- name: co.topl:brambl_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/brambl_2.13/
+  language: scala
+  official: true
+  version: 1.10.2
+  published: '2022-03-14'
+- name: co.topl:tools_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/tools_2.13/
+  language: scala
+  official: true
+  version: 1.10.2
+  published: '2022-03-14'
+- name: co.topl:common_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/common_2.13/
+  language: scala
+  official: true
+  version: 1.10.2
+  published: '2022-03-14'
+- name: co.topl:akka-http-rpc_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/akka-http-rpc_2.13/
+  language: scala
+  official: true
+  version: 1.10.2
+  published: '2022-03-14'
+- name: co.topl:bifrost-daml-broker_2.13
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/bifrost-daml-broker_2.13/
+  language: scala
+  official: true
+  version: 1.0.0.beta-2
+  published: '2023-02-10'
+- name: co.topl:daml-bifrost-module
+  registry: maven
+  url: https://repo1.maven.org/maven2/co/topl/daml-bifrost-module/
+  language: daml
+  official: true
+  version: 0.1.0
+  published: '2023-01-04'
+- name: bramblts
+  registry: npm
+  url: https://www.npmjs.com/package/bramblts
+  language: typescript
+  official: true
+  license: MPL-2.0
+  version: 2.0.0-beta.0
+  published: '2024-06-04'
+  repository: https://github.com/Topl/BramblTS
+  note: >-
+    "TypeScript SDK for the Apparatus Blockchain". Its GitHub repository (Topl/BramblTS) now
+    returns 404 — the package survives on npm, the source does not.
+- name: topl_common
+  registry: npm
+  url: https://www.npmjs.com/package/topl_common
+  language: typescript
+  official: true
+  license: MIT
+  version: 1.0.16-alpha.4
+  published: '2024-05-28'
+  repository: https://github.com/Topl/ts_topl_common
+  note: TS types generated from the Topl protobuf specification. Source repository now 404.
+- name: brambljs
+  registry: npm
+  url: https://www.npmjs.com/package/brambljs
+  language: javascript
+  official: true
+  license: MPL-2.0
+  version: 1.3.1
+  published: '2022-05-04'
+  repository: https://github.com/Topl/BramblJS
+  note: Legacy 1.x JavaScript SDK. Source repository now 404.
+- name: mubrambl
+  registry: npm
+  url: https://www.npmjs.com/package/mubrambl
+  language: javascript
+  official: true
+  license: MPL-2.0
+  version: 1.1.0
+  published: '2021-04-09'
+  repository: https://github.com/Topl/muBrambl
+- name: bip-topl
+  registry: npm
+  url: https://www.npmjs.com/package/bip-topl
+  language: javascript
+  official: true
+  version: 0.0.3
+  published: '2021-09-08'
+  repository: https://github.com/Topl/bip-topl
+- name: '@topl_protocol/brambldart'
+  registry: npm
+  url: https://www.npmjs.com/package/@topl_protocol/brambldart
+  language: javascript
+  official: true
+  version: 0.0.1
+  published: '2021-10-18'
+  repository: https://github.com/Topl/BramblDart
+- name: brambldart
+  registry: pub.dev
+  url: https://pub.dev/packages/brambldart
+  language: dart
+  official: true
+  version: 0.0.1
+  published: '2021-10-18'
+  note: >-
+    Its published homepage, brambldart.docs.topl.co, no longer resolves (NXDOMAIN, probed
+    2026-08-30).
+- name: topl_common
+  registry: pub.dev
+  url: https://pub.dev/packages/topl_common
+  language: dart
+  official: true
+  version: 2.1.0
+  published: '2023-10-07'
+  repository: https://github.com/Topl/dart_topl_common
+- name: toplprotocol/bifrost-node
+  registry: docker
+  url: https://hub.docker.com/r/toplprotocol/bifrost-node
+  language: container
+  official: true
+  version: 2.0.0-beta5
+  published: '2024-08-12'
+  note: >-
+    Bifrost full-node image; the `latest` tag is 2.0.0-beta5 (2024-08-12) and the newest tag of
+    any kind is a `dev` build pushed 2024-09-26 — the most recent first-party artifact Topl
+    published anywhere. 5,890 pulls.
+- name: toplprotocol/genus
+  registry: docker
+  url: https://hub.docker.com/r/toplprotocol/genus
+  language: container
+  official: true
+  version: null
+  published: '2024-09-26'
+  note: >-
+    Genus indexer image (the service behind BlockService/TransactionService in grpc/). Version
+    recorded null because the repository's tag list was not enumerated in this pass; the
+    repository last_updated date is recorded instead.
+- name: toplprotocol/topl-btc-bridge
+  registry: docker
+  url: https://hub.docker.com/r/toplprotocol/topl-btc-bridge
+  language: container
+  official: true
+  version: null
+  published: '2024-05-31'
+  note: Version null — repository last_updated recorded, tag list not enumerated.
+- name: toplprotocol/topl-btc-bridge-consensus
+  registry: docker
+  url: https://hub.docker.com/r/toplprotocol/topl-btc-bridge-consensus
+  language: container
+  official: true
+  version: null
+  published: '2024-09-12'
+  note: Version null — repository last_updated recorded, tag list not enumerated.
+- name: toplprotocol/topl-btc-bridge-public-api
+  registry: docker
+  url: https://hub.docker.com/r/toplprotocol/topl-btc-bridge-public-api
+  language: container
+  official: true
+  version: null
+  published: '2024-09-12'
+  note: Version null — repository last_updated recorded, tag list not enumerated.
+- name: toplprotocol/faucet
+  registry: docker
+  url: https://hub.docker.com/r/toplprotocol/faucet
+  language: container
+  official: true
+  version: null
+  published: '2023-10-19'
+  note: Testnet faucet image. Version null — tag list not enumerated.
+- name: toplprotocol/annulus
+  registry: docker
+  url: https://hub.docker.com/r/toplprotocol/annulus
+  language: container
+  official: true
+  version: null
+  published: '2023-12-21'
+  note: Version null — tag list not enumerated.
+absent:
+- registry: pypi
+  note: >-
+    Topl's own documentation claimed Python among the Brambl SDK languages, but no Topl-owned
+    Python distribution was found. pypi.org/pypi/brambl/json returned 404 on 2026-08-30.
+- registry: crates.io
+  note: No Rust distribution found.
+- registry: nuget
+  note: No .NET distribution found.

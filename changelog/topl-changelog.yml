@@ -1,0 +1,76 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  No dated changelog was published on any reachable host — the Knowledge-Base repository has a
+  "Changelog Posts" directory containing only a welcome post. The release history below is
+  derived from Maven Central metadata (repo1.maven.org/maven2/co/topl/), Docker Hub tag
+  timestamps, and npm/pub.dev registry metadata, all read on 2026-08-30.
+name: Topl / Apparatus release history
+description: >-
+  A reconstructed release history. There is no first-party changelog; these are the dated
+  artifacts the company actually shipped.
+changelog_published: false
+scheme: semver with pre-release qualifiers
+current_version: 2.0.0-beta8
+entries:
+- version: dev (bifrost-node)
+  date: '2024-09-26'
+  registry: docker
+  breaking: unknown
+  highlights: 'Final container image pushed by the company — toplprotocol/bifrost-node:dev and toplprotocol/genus. The last first-party artifact of any kind.'
+- version: 2.0.0-beta5
+  date: '2024-08-12'
+  registry: docker
+  breaking: unknown
+  highlights: 'bifrost-node:latest settles on 2.0.0-beta5.'
+- version: 2.0.0-beta8
+  date: '2024-07-15'
+  registry: maven
+  breaking: unknown
+  highlights: 'Final Maven Central release: brambl-sdk, crypto, quivr4s and service-kit at 2.0.0-beta8; brambl-cli and shared at 2.0.0-beta6.'
+- version: 2.0.0-beta.0 (bramblts)
+  date: '2024-06-04'
+  registry: npm
+  breaking: unknown
+  highlights: 'TypeScript SDK for the Apparatus blockchain, first and only 2.x publish.'
+- version: 0.2.0-alpha0
+  date: '2024-05-31'
+  registry: maven
+  breaking: unknown
+  highlights: 'topl-btc-bridge and topl-btc-cli — the Bitcoin bridge for the Thunder L2 direction.'
+- version: 2.0.0-beta3
+  date: '2024-05-30'
+  registry: maven
+  breaking: unknown
+  highlights: 'protobuf-fs2 for Scala 2.13 and Scala 3, compiled from the protobuf contract in grpc/.'
+- version: 1.0.16-alpha.4 (topl_common)
+  date: '2024-05-28'
+  registry: npm
+  breaking: unknown
+  highlights: TS types generated from the protobuf specification.
+- version: 'protobuf module commit beacdfa5'
+  date: '2023-10-25'
+  registry: buf
+  breaking: unknown
+  highlights: 'Last commit to the published protobuf contract on the Buf Schema Registry — the contract has been frozen since.'
+- version: 2.1.0 (topl_common, Dart)
+  date: '2023-10-07'
+  registry: pub.dev
+  breaking: unknown
+- version: 1.0.0.beta-2
+  date: '2023-02-10'
+  registry: maven
+  breaking: unknown
+  highlights: bifrost-daml-broker — DAML integration.
+- version: 1.10.2
+  date: '2022-03-14'
+  registry: maven
+  breaking: true
+  highlights: >-
+    Final release of the 1.x Topl line (topl-rpc, brambl, tools, common, akka-http-rpc). The
+    2.x Apparatus line replaced the JSON-RPC interface with gRPC — a breaking transport change
+    that was never accompanied by a published migration or deprecation notice.
+- version: 1.3.1 (brambljs)
+  date: '2022-05-04'
+  registry: npm
+  breaking: unknown

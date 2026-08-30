@@ -1,0 +1,45 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  Derived from grpc/ (the verbatim protobuf contract) and from the archived BramblDart SDK
+  documentation in github.com/Topl/Knowledge-Base
+  (docs/Developers/06-Software Development Kits/01-BramblDart.md). The derive-authentication.py
+  helper was not used: it reads OpenAPI securitySchemes and this provider publishes a protobuf
+  contract, not an OpenAPI.
+name: Topl / Apparatus authentication profile
+description: >-
+  There is no transport-level authentication scheme. Authorization is cryptographic and lives
+  inside the transaction.
+transport_auth:
+  schemes: []
+  note: >-
+    No apiKey, http, oauth2, openIdConnect or mutualTLS scheme is declared anywhere in the 38
+    published proto files, and no reachable Topl document describes obtaining an API
+    credential. The documented public testnet endpoint accepted TLS-encrypted but
+    unauthenticated gRPC calls.
+transaction_authorization:
+  model: Quivr propositions and proofs
+  description: >-
+    Every transaction output is locked by a Proposition and spent by supplying a matching
+    Proof, carried in an Attestation. This is the real access control in the system: reads are
+    open, writes are gated by possession of a key that satisfies the lock.
+  contract_locations:
+  - grpc/quivr/models/proposition.proto
+  - grpc/quivr/models/proof.proto
+  - grpc/brambl/models/box/attestation.proto
+  - grpc/brambl/models/box/lock.proto
+  - grpc/brambl/models/box/challenge.proto
+key_material:
+  signing: Extended Ed25519 signing keys
+  derivation: HD wallet derivation supported by the SDKs
+  keystore: 'v1 encrypted key files, password-protected'
+  source: >-
+    github.com/Topl/Knowledge-Base docs/Developers/06-Software Development Kits/01-BramblDart.md
+    — "The library supports raw private keys and v1 encrypted key-files. In addition, it also
+    supports the generation of keys via a HD wallet."
+  wallet_tooling: 'brambl-cli wallet (initialize-wallet, current-address, balance) — see cli/topl-cli.yml'
+scopes:
+  published: false
+  note: >-
+    No OAuth scopes exist, so scopes/ is deliberately absent. derive-oauth-scopes.py was not
+    run: there is no oauth2 securityScheme and no OAuth documentation to derive from.

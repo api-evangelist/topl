@@ -1,0 +1,116 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  Derived by reading the message and field declarations in grpc/ — the verbatim protobuf
+  contract from buf.build/seanattopl/topl-protobuf-specs. Every relationship below names the
+  file and the field it was read from.
+name: Topl / Apparatus (Brambl) data model
+description: >-
+  The entity-relationship graph of the Brambl ledger model plus the consensus and node models.
+  138 messages across 5 first-party protobuf packages. This is a UTXO ledger: value lives in
+  boxes, boxes are locked by propositions, and transactions consume and create them.
+identifier_scheme:
+  form: 32-byte evidence digests, constrained in the contract by protoc-gen-validate
+  rule: 'bytes value = 1 [(validate.rules).bytes.len = 32]'
+  file: grpc/brambl/models/identifier.proto
+  identifiers:
+  - {name: TransactionId, derivation: 'evidence of the transaction''s signable bytes'}
+  - {name: LockId, derivation: 'evidence of the lock''s signable bytes'}
+  - {name: AccumulatorRootId, derivation: 'evidence of the accumulator root''s signable bytes'}
+  - {name: GroupId, derivation: 'SHA-256 over label + fixedSeries + seriesTokenSupply + transactionId + utxoIndex (TAM V2 group)'}
+  - {name: SeriesId, derivation: 'SHA-256 over label + fixedSeries + seriesTokenSupply + transactionId + utxoIndex (TAM V2 series)'}
+  - {name: BlockId, file: grpc/consensus/models/block_id.proto}
+entities:
+- name: IoTransaction
+  file: grpc/brambl/models/transaction/io_transaction.proto
+  role: The unit of state change. Consumes inputs, produces outputs.
+- name: SpentTransactionOutput
+  file: grpc/brambl/models/transaction/spent_transaction_output.proto
+  role: An input — a previously created output being consumed, with its attestation.
+- name: UnspentTransactionOutput
+  file: grpc/brambl/models/transaction/unspent_transaction_output.proto
+  role: An output — value assigned to a lock address.
+- name: Box
+  file: grpc/brambl/models/box/box.proto
+  role: A value plus the lock that must be satisfied to spend it.
+- name: Lock
+  file: grpc/brambl/models/box/lock.proto
+  role: 'Predicate | Image | Commitment — a threshold over challenges.'
+- name: Challenge
+  file: grpc/brambl/models/box/challenge.proto
+- name: Attestation
+  file: grpc/brambl/models/box/attestation.proto
+  role: The proofs supplied to satisfy a lock.
+- name: Value
+  file: grpc/brambl/models/box/value.proto
+  role: LVL, topl, asset, group and series token values.
+- name: Asset
+  file: grpc/brambl/models/box/asset.proto
+- name: AssetMintingStatement
+  file: grpc/brambl/models/box/assets_statements.proto
+- name: Datum
+  file: grpc/brambl/models/datum.proto
+  role: Carries transaction metadata and the group/series policies.
+- name: LockAddress
+  file: grpc/brambl/models/address.proto
+  role: 'network + ledger + LockId — the address form used in UTXOs.'
+- name: TransactionOutputAddress
+  file: grpc/brambl/models/address.proto
+  role: 'network + ledger + index + TransactionId — points at one output of one transaction.'
+- name: TransactionInputAddress
+  file: grpc/brambl/models/address.proto
+- name: Proposition
+  file: grpc/quivr/models/proposition.proto
+- name: Proof
+  file: grpc/quivr/models/proof.proto
+- name: BlockHeader
+  file: grpc/consensus/models/block_header.proto
+- name: Block
+  file: grpc/node/models/block.proto
+- name: SlotData
+  file: grpc/consensus/models/slot_data.proto
+- name: EligibilityCertificate
+  file: grpc/consensus/models/eligibility_certificate.proto
+- name: OperationalCertificate
+  file: grpc/consensus/models/operational_certificate.proto
+- name: StakingAddress
+  file: grpc/consensus/models/staking.proto
+- name: EpochData
+  file: grpc/node/models/node_epochData.proto
+- name: Txo
+  file: grpc/genus/genus_models.proto
+  role: The indexer's view of a transaction output.
+relationships:
+- {from: IoTransaction, to: SpentTransactionOutput, type: has_many, via: 'inputs', file: grpc/brambl/models/transaction/io_transaction.proto}
+- {from: IoTransaction, to: UnspentTransactionOutput, type: has_many, via: 'outputs', file: grpc/brambl/models/transaction/io_transaction.proto}
+- {from: IoTransaction, to: Datum, type: has_one, via: 'datum (required)', file: grpc/brambl/models/transaction/io_transaction.proto}
+- {from: IoTransaction, to: TransactionId, type: has_one, via: 'transactionId (optional convenience field, excluded from signable bytes)', file: grpc/brambl/models/transaction/io_transaction.proto}
+- {from: IoTransaction, to: GroupPolicy, type: has_many, via: 'groupPolicies', file: grpc/brambl/models/transaction/io_transaction.proto}
+- {from: IoTransaction, to: SeriesPolicy, type: has_many, via: 'seriesPolicies', file: grpc/brambl/models/transaction/io_transaction.proto}
+- {from: IoTransaction, to: AssetMintingStatement, type: has_many, via: 'mintingStatements', file: grpc/brambl/models/transaction/io_transaction.proto}
+- {from: Box, to: Lock, type: has_one, via: 'lock (required)', file: grpc/brambl/models/box/box.proto}
+- {from: Box, to: Value, type: has_one, via: 'value (required)', file: grpc/brambl/models/box/box.proto}
+- {from: Lock, to: Challenge, type: has_many, via: 'Predicate.challenges', file: grpc/brambl/models/box/lock.proto}
+- {from: Lock, to: LockId, type: has_many, via: 'Image.leaves', file: grpc/brambl/models/box/lock.proto}
+- {from: Lock, to: AccumulatorRootId, type: has_one, via: 'Commitment.root', file: grpc/brambl/models/box/lock.proto}
+- {from: LockAddress, to: LockId, type: belongs_to, via: 'id (required)', file: grpc/brambl/models/address.proto}
+- {from: TransactionOutputAddress, to: TransactionId, type: belongs_to, via: 'id (required) + index', file: grpc/brambl/models/address.proto}
+- {from: TransactionInputAddress, to: TransactionId, type: belongs_to, via: 'id (required) + index', file: grpc/brambl/models/address.proto}
+- {from: SpentTransactionOutput, to: Attestation, type: has_one, via: 'attestation', file: grpc/brambl/models/transaction/spent_transaction_output.proto}
+- {from: Attestation, to: Proof, type: has_many, via: 'responses', file: grpc/brambl/models/box/attestation.proto}
+- {from: Challenge, to: Proposition, type: has_one, via: 'revealed / PreviousProposition', file: grpc/brambl/models/box/challenge.proto}
+- {from: Block, to: BlockHeader, type: has_one, via: 'header', file: grpc/node/models/block.proto}
+- {from: SlotData, to: BlockId, type: belongs_to, via: 'slotId / parentSlotId', file: grpc/consensus/models/slot_data.proto}
+- {from: BlockHeader, to: EligibilityCertificate, type: has_one, via: 'eligibilityCertificate', file: grpc/consensus/models/block_header.proto}
+- {from: BlockHeader, to: OperationalCertificate, type: has_one, via: 'operationalCertificate', file: grpc/consensus/models/operational_certificate.proto}
+- {from: GroupId, to: TransactionId, type: belongs_to, via: 'derived from transactionId + utxoIndex', file: grpc/brambl/models/identifier.proto}
+- {from: SeriesId, to: TransactionId, type: belongs_to, via: 'derived from transactionId + utxoIndex', file: grpc/brambl/models/identifier.proto}
+query_entry_points:
+- {rpc: TransactionService.getTxosByLockAddress, key: LockAddress}
+- {rpc: TransactionService.getTxosByAssetLabel, key: asset label}
+- {rpc: BlockService.getBlockById, key: BlockId}
+- {rpc: BlockService.getBlockByHeight, key: height}
+- {rpc: TokenService.getGroupPolicy, key: GroupId}
+- {rpc: TokenService.getSeriesPolicy, key: SeriesId}
+- {rpc: NodeRpc.FetchTransaction, key: TransactionId}
+subway_render: null

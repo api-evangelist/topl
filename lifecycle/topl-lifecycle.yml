@@ -1,0 +1,57 @@
+generated: '2026-08-30'
+method: probed
+source: >-
+  Maven Central (repo1.maven.org/maven2/co/topl/), Docker Hub (hub.docker.com/v2/repositories/
+  toplprotocol), the GitHub REST API for the Topl organization, WHOIS for topl.co, and direct
+  DNS/HTTPS probes — all run 2026-08-30.
+name: Topl / Apparatus API lifecycle
+description: >-
+  Lifecycle record for the Topl blockchain platform, rebranded Apparatus. The published
+  contract and the published packages survive; the running service and every documentation
+  host do not.
+status: wound-down
+versioning:
+  scheme: semver with pre-release qualifiers
+  lines:
+  - {line: '1.x (Topl)', latest: 1.10.2, released: '2022-03-14', interface: JSON-RPC over HTTP, note: 'The Bifrost "Topl RPC" era.'}
+  - {line: '2.x (Apparatus)', latest: 2.0.0-beta8, released: '2024-07-15', interface: gRPC + protobuf, note: 'Never reached a stable 2.0.0 release. Mainnet was never launched.'}
+  current_version: 2.0.0-beta8
+  breaking_change_policy: not published
+deprecation:
+  policy_published: false
+  sunset_header: not observed
+  note: >-
+    No deprecation or sunset policy was ever published, and none was issued for the shutdown.
+    The 1.x JSON-RPC surface was superseded by the 2.x gRPC surface without a documented
+    migration or sunset window; the 2.x surface then went dark without an announcement that
+    could be found on any reachable host.
+status_page:
+  published: false
+  note: No status page was found on any reachable host.
+sla:
+  published: false
+timeline:
+- {date: '2017-02-26', event: 'Topl GitHub organization created.', source: 'https://api.github.com/orgs/topl'}
+- {date: '2020-12-22', event: 'Topl closes a $3M seed round to build an ESG/impact blockchain.', source: businesswire.com}
+- {date: '2022-03-14', event: 'Last release of the 1.x Topl line (co.topl 1.10.2) to Maven Central.', source: repo1.maven.org}
+- {date: '2023-10-25', event: 'Last commit to the published protobuf module on the Buf Schema Registry.', source: 'https://buf.build/seanattopl/topl-protobuf-specs'}
+- {date: '2023-11', event: 'Rebrand to Apparatus; the Thunder Bitcoin-L2 protocol replaces the standalone Topl chain as the product. Docs move to docs.apparatus.live.', source: 'github.com/Topl/Knowledge-Base docs/About/introducing-thunder.md + static/CNAME'}
+- {date: '2024-07-15', event: 'Final Maven Central release across the co.topl namespace (2.0.0-beta8).', source: repo1.maven.org}
+- {date: '2024-07-29', event: 'Last push to any public Topl GitHub repository (Knowledge-Base).', source: 'https://api.github.com/orgs/topl/repos'}
+- {date: '2024-09-26', event: 'Final container image pushed to Docker Hub (toplprotocol/bifrost-node:dev). The last first-party artifact of any kind.', source: hub.docker.com}
+- {date: '2024-12-30', event: 'topl.co is re-registered by a new owner after lapsing; it now serves an unrelated casino-affiliate site.', source: 'WHOIS topl.co — Creation Date 2024-12-30, Registrar Virtualia LLC'}
+- {date: '2026-08-30', event: 'This probe. All 10 remaining public GitHub repositories are archived; the SDK and node source repositories (Bifrost, BramblJS, BramblTS, protobuf-specs, ts_topl_common) return 404; every documentation and API host returns NXDOMAIN; apparatus.live does not answer.', source: this pass}
+end_of_life_evidence:
+- {check: 'GitHub org public repositories', result: '10 of 10 archived, newest push 2024-07-29', url: 'https://api.github.com/orgs/topl/repos', status: 200}
+- {check: 'Source repositories for the SDKs and node', result: '404 — Topl/Bifrost, Topl/BramblJS, Topl/BramblTS, Topl/protobuf-specs, Topl/ts_topl_common all removed', url: 'https://api.github.com/repos/Topl/Bifrost', status: 404}
+- {check: 'Documented public testnet gRPC endpoint', result: NXDOMAIN, url: 'https://testnet.topl.tech', status: 0}
+- {check: 'Developer documentation host', result: NXDOMAIN, url: 'https://docs.topl.co/', status: 0}
+- {check: 'Post-rebrand documentation host', result: NXDOMAIN, url: 'https://docs.apparatus.live/', status: 0}
+- {check: 'Post-rebrand corporate site', result: 'connection timed out — no response', url: 'https://apparatus.live/', status: 0}
+- {check: 'Original corporate domain', result: 're-registered 2024-12-30; now an unrelated casino-affiliate site', url: 'https://topl.co/', status: 200}
+- {check: 'BaaS API console', result: NXDOMAIN, url: 'https://topl.services/', status: 0}
+what_survives:
+- 'The full protobuf/gRPC contract, still downloadable from the Buf Schema Registry (saved verbatim to grpc/).'
+- 'The Scala, TypeScript, JavaScript and Dart SDKs on Maven Central, npm and pub.dev.'
+- 'The Bifrost node, Genus indexer and Bitcoin-bridge container images on Docker Hub.'
+- 'The archived developer documentation in github.com/Topl/Knowledge-Base.'

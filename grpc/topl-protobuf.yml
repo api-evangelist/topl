@@ -1,0 +1,113 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://buf.build/seanattopl/topl-protobuf-specs — the Buf Schema Registry module that
+  Topl's own developer documentation names as the canonical browse location for its protobuf
+  schema (Topl/Knowledge-Base, docs/Developers/gRPC/Protobuf/protobuf.md: "Browse the protobuf
+  schema here"). Downloaded verbatim over the anonymous BSR DownloadService API on 2026-08-30.
+name: Apparatus (Topl) Protobuf / gRPC contract
+description: >-
+  The complete machine-readable contract for the Topl / Apparatus blockchain node: 38 proto3
+  files defining 6 gRPC services, 30 RPCs and 138 messages across the Bifrost node RPC, the
+  Genus indexer, the Brambl transaction model, the Quivr proposition/proof language, and the
+  consensus models.
+ownership:
+  verdict: confirmed
+  evidence: >-
+    Every Topl-authored file declares a co.topl.* protobuf package (co.topl.brambl.models,
+    co.topl.consensus.models, co.topl.genus.services, co.topl.node.services, co.topl.proto.node),
+    and Topl's own archived developer documentation links to this exact BSR module. The module is
+    published under the personal BSR handle `seanattopl` (a Topl engineer) rather than an org
+    handle, which is why the fetch host alone would not have proved ownership — the co.topl
+    package declarations and the first-party docs link do.
+registry:
+  type: buf
+  module: buf.build/seanattopl/topl-protobuf-specs
+  commit: beacdfa55116453e935327f1528cc283
+  commit_created: '2023-10-25'
+  http_status: 200
+syntax: proto3
+counts:
+  files: 38
+  services: 6
+  rpcs: 30
+  messages: 138
+external_imports:
+- google/protobuf/struct.proto
+- google/protobuf/duration.proto
+- google/protobuf/wrappers.proto
+- validate/validate.proto        # protoc-gen-validate (bufbuild) field constraints
+services:
+- name: NodeRpc
+  package: co.topl.node.services
+  file: grpc/node/services/bifrost_rpc.proto
+  role: Bifrost full-node RPC — submit transactions, read blocks, follow the chain tip
+  rpcs:
+  - {name: BroadcastTransaction, request: BroadcastTransactionReq, response: BroadcastTransactionRes, streaming: unary}
+  - {name: CurrentMempool, request: CurrentMempoolReq, response: CurrentMempoolRes, streaming: unary}
+  - {name: CurrentMempoolContains, request: CurrentMempoolContainsReq, response: CurrentMempoolContainsRes, streaming: unary}
+  - {name: FetchBlockHeader, request: FetchBlockHeaderReq, response: FetchBlockHeaderRes, streaming: unary}
+  - {name: FetchBlockBody, request: FetchBlockBodyReq, response: FetchBlockBodyRes, streaming: unary}
+  - {name: FetchTransaction, request: FetchTransactionReq, response: FetchTransactionRes, streaming: unary}
+  - {name: FetchBlockIdAtHeight, request: FetchBlockIdAtHeightReq, response: FetchBlockIdAtHeightRes, streaming: unary}
+  - {name: FetchBlockIdAtDepth, request: FetchBlockIdAtDepthReq, response: FetchBlockIdAtDepthRes, streaming: unary}
+  - {name: SynchronizationTraversal, request: SynchronizationTraversalReq, response: SynchronizationTraversalRes, streaming: server}
+  - {name: FetchNodeConfig, request: FetchNodeConfigReq, response: FetchNodeConfigRes, streaming: server}
+  - {name: FetchEpochData, request: FetchEpochDataReq, response: FetchEpochDataRes, streaming: unary}
+- name: BlockService
+  package: co.topl.genus.services
+  file: grpc/genus/genus_rpc.proto
+  role: Genus indexer — block lookup by id, height or depth
+  rpcs:
+  - {name: getBlockById, request: GetBlockByIdRequest, response: BlockResponse, streaming: unary}
+  - {name: getBlockByHeight, request: GetBlockByHeightRequest, response: BlockResponse, streaming: unary}
+  - {name: getBlockByDepth, request: GetBlockByDepthRequest, response: BlockResponse, streaming: unary}
+- name: TransactionService
+  package: co.topl.genus.services
+  file: grpc/genus/genus_rpc.proto
+  role: Genus indexer — transaction and TxO queries, plus on-chain index management
+  rpcs:
+  - {name: getTransactionById, request: GetTransactionByIdRequest, response: TransactionResponse, streaming: unary}
+  - {name: getTransactionByLockAddressStream, request: QueryByLockAddressRequest, response: TransactionResponse, streaming: server}
+  - {name: getTxosByLockAddress, request: QueryByLockAddressRequest, response: TxoLockAddressResponse, streaming: unary}
+  - {name: getTxosByLockAddressStream, request: QueryByLockAddressRequest, response: TxoLockAddressResponse, streaming: server}
+  - {name: getTxosByAssetLabel, request: QueryByAssetLabelRequest, response: TxoResponse, streaming: server}
+  - {name: createOnChainTransactionIndex, request: CreateOnChainTransactionIndexRequest, response: CreateOnChainTransactionIndexResponse, streaming: unary}
+  - {name: getExistingTransactionIndexes, request: GetExistingTransactionIndexesRequest, response: GetExistingTransactionIndexesResponse, streaming: unary}
+  - {name: getIndexedTransactions, request: GetIndexedTransactionsRequest, response: TransactionResponse, streaming: server}
+  - {name: dropIndex, request: DropIndexRequest, response: DropIndexResponse, streaming: unary}
+- name: NetworkMetricsService
+  package: co.topl.genus.services
+  file: grpc/genus/genus_rpc.proto
+  role: Network statistics — TxO, block and chain-size metrics
+  rpcs:
+  - {name: getTxoStats, request: GetTxoStatsReq, response: GetTxoStatsRes, streaming: unary}
+  - {name: getBlockchainSizeStats, request: BlockchainSizeStatsReq, response: BlockchainSizeStatsRes, streaming: unary}
+  - {name: getBlockStats, request: BlockStatsReq, response: BlockStatsRes, streaming: unary}
+- name: TokenService
+  package: co.topl.genus.services
+  file: grpc/genus/genus_rpc.proto
+  role: Token policy lookup for group- and series-constructor tokens
+  rpcs:
+  - {name: getGroupPolicy, request: QueryByGroupIdRequest, response: GroupPolicyResponse, streaming: unary}
+  - {name: getSeriesPolicy, request: QueryBySeriesIdRequest, response: SeriesPolicyResponse, streaming: unary}
+- name: Health
+  package: grpc.health.v1
+  file: grpc/google/services/health_rpc.proto
+  role: >-
+    The standard gRPC Health Checking Protocol (grpc.health.v1), vendored into the module
+    verbatim. Not Topl-authored; recorded here because the node implements it.
+  rpcs:
+  - {name: Check, request: HealthCheckRequest, response: HealthCheckResponse, streaming: unary}
+  - {name: Watch, request: HealthCheckRequest, response: HealthCheckResponse, streaming: server}
+model_packages:
+- {package: co.topl.brambl.models, role: 'Brambl transaction model — addresses, boxes, locks, values, assets, datums, events, identifiers'}
+- {package: co.topl.brambl.models.transaction, role: 'IoTransaction, spent/unspent transaction outputs, schedule'}
+- {package: co.topl.brambl.models.box, role: 'Box, Lock, Attestation, Challenge, Value, Asset and asset statements'}
+- {package: co.topl.consensus.models, role: 'BlockHeader, BlockId, eligibility + operational certificates, protocol version, slot data, staking'}
+- {package: co.topl.node.models, role: 'Block, node config, epoch data, p2p, ratio'}
+- {package: quivr.models, role: 'Quivr — Proposition / Proof language used to lock and unlock boxes'}
+operational_note: >-
+  The contract is preserved and downloadable, but the public endpoint it described is gone.
+  The documented public testnet host (testnet.topl.tech:443) returned NXDOMAIN when probed on
+  2026-08-30. See lifecycle/topl-lifecycle.yml.

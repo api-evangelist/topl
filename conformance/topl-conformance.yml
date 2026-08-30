@@ -1,0 +1,88 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  Derived from the protobuf contract saved verbatim in grpc/ (buf.build/seanattopl/
+  topl-protobuf-specs, commit beacdfa55116453e935327f1528cc283) and from Topl's archived
+  developer documentation at github.com/Topl/Knowledge-Base.
+name: Topl / Apparatus standards conformance
+description: >-
+  What the published contract declares about itself. Every entry below points at an exact
+  location in a file in grpc/; nothing is taken from marketing prose.
+conformance:
+- id: proto3
+  conforms: true
+  evidence: 'All 38 files in grpc/ open with `syntax = "proto3";` — e.g. grpc/brambl/models/address.proto:1.'
+- id: grpc
+  conforms: true
+  evidence: >-
+    6 service definitions and 30 rpc declarations across grpc/node/services/bifrost_rpc.proto,
+    grpc/genus/genus_rpc.proto and grpc/google/services/health_rpc.proto. Server-streaming is
+    used for chain traversal and TxO queries (SynchronizationTraversal, FetchNodeConfig,
+    getTxosByLockAddressStream, getIndexedTransactions).
+- id: grpc-health-checking-protocol-v1
+  conforms: true
+  evidence: >-
+    grpc/google/services/health_rpc.proto declares `package grpc.health.v1;` with
+    `service Health { rpc Check(...); rpc Watch(...) returns (stream ...); }` — the canonical
+    gRPC Health Checking Protocol, implemented rather than approximated.
+- id: protoc-gen-validate
+  conforms: true
+  evidence: >-
+    `import "validate/validate.proto";` in grpc/brambl/models/identifier.proto,
+    grpc/brambl/models/evidence.proto and grpc/consensus/models/block_id.proto — field
+    constraints are declared in the contract rather than left to prose.
+- id: buf-schema-registry
+  conforms: true
+  evidence: >-
+    The module is published to the Buf Schema Registry as buf.build/seanattopl/
+    topl-protobuf-specs and Topl's own docs (Knowledge-Base docs/Developers/gRPC/Protobuf/
+    protobuf.md) direct developers there. It resolves and downloads anonymously (HTTP 200,
+    probed 2026-08-30).
+- id: tls
+  conforms: true
+  evidence: >-
+    The quickstart instructs clients to pass `--secure`/`-s true` against the public testnet on
+    port 443 (Knowledge-Base docs/Developers/02-Quickstart Tutorial/01-setup.md). The endpoint
+    itself no longer resolves, so this is documented, not observed.
+- id: oauth2
+  conforms: false
+  evidence: 'No OAuth 2.0 flow appears in the contract or in any reachable documentation.'
+- id: openid-connect
+  conforms: false
+  evidence: '/.well-known/openid-configuration returned 404 or no response on every probed host.'
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    Not applicable — errors travel as gRPC status codes, not as an HTTP problem+json envelope.
+    No RFC 9457 surface exists to conform to.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No idempotency key appears in any request message in grpc/. Replay protection is instead a
+    property of the ledger: a transaction spends specific TxOs and cannot be applied twice.
+- id: pagination
+  conforms: false
+  evidence: >-
+    No page/cursor/limit fields appear in the Genus query requests. Large result sets are
+    delivered by gRPC server streaming instead (getTxosByLockAddressStream,
+    getIndexedTransactions, getTransactionByLockAddressStream).
+domain_standard:
+  market: blockchain / distributed ledger
+  finding: >-
+    No cross-vendor domain standard is declared. The contract defines a proprietary ledger
+    vocabulary — Quivr propositions and proofs (quivr/models/proposition.proto,
+    quivr/models/proof.proto), Brambl boxes, locks and attestations, and Taktikos
+    proof-of-stake consensus models — none of which implement a shared industry schema. The
+    2.x Thunder work targets Bitcoin as a settlement layer, but no BIP, Lightning BOLT, or
+    other Bitcoin-ecosystem message schema is imported by the contract.
+  conforms: false
+  reward_only_note: >-
+    Recorded as an honest absence, not a penalty: the blockchain-node market has no published
+    interoperability standard this contract declined to adopt.
+compliance_programs:
+  published: false
+  note: >-
+    No SOC 2, ISO 27001 or other certification claim was found on any reachable host. A
+    community bug bounty program was documented (Knowledge-Base docs/Bounty_Program/) but it
+    ran through a Dework space and a legal.apparatus.live agreement page, both of which no
+    longer resolve.

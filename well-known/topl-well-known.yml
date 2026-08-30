@@ -1,0 +1,50 @@
+generated: '2026-08-30'
+method: probed
+source: Direct unauthenticated HTTPS probes run 2026-08-30 with a browser User-Agent.
+name: Topl / Apparatus .well-known probe
+description: >-
+  Probe of the two hosts historically associated with this company. NO WellKnown pointer is
+  emitted from this file: nothing returned a document. Read the host notes before using this —
+  topl.co is no longer controlled by Topl.
+result: no documents served
+hosts:
+- host: topl.co
+  ownership: >-
+    NOT CONTROLLED BY THIS COMPANY. WHOIS gives a creation date of 2024-12-30 — the domain
+    lapsed and was re-registered — and the site now serves an unrelated casino-affiliate
+    WordPress install canonicalised to casino.topl.co. The probe below is recorded for the
+    record only and must not be credited to Topl either way.
+  documents:
+  - {path: /.well-known/security.txt, status: 404, file: null}
+  - {path: /.well-known/openid-configuration, status: 404, file: null}
+  - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+  - {path: /.well-known/api-catalog, status: 404, file: null}
+  - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+  - {path: /.well-known/agent-card.json, status: 404, file: null}
+  - {path: /.well-known/agent.json, status: 404, file: null}
+  - {path: /openapi.json, status: 404, file: null}
+  - {path: /llms.txt, status: 404, file: null}
+- host: apparatus.live
+  ownership: >-
+    The company's own post-rebrand domain, named as [apparatus]: https://apparatus.live in
+    Topl's archived developer documentation. It did not answer.
+  documents:
+  - {path: /.well-known/security.txt, status: 0, file: null, note: 'connection timed out — no response'}
+  - {path: /.well-known/openid-configuration, status: 0, file: null, note: 'connection timed out — no response'}
+  - {path: /.well-known/oauth-authorization-server, status: 0, file: null, note: 'connection timed out — no response'}
+  - {path: /.well-known/api-catalog, status: 0, file: null, note: 'connection timed out — no response'}
+  - {path: /.well-known/ai-plugin.json, status: 0, file: null, note: 'connection timed out — no response'}
+  - {path: /.well-known/agent-card.json, status: 0, file: null, note: 'connection timed out — no response'}
+  - {path: /.well-known/agent.json, status: 0, file: null, note: 'connection timed out — no response'}
+  - {path: /openapi.json, status: 0, file: null, note: 'connection timed out — no response'}
+  - {path: /llms.txt, status: 0, file: null, note: 'connection timed out — no response'}
+unresolvable_hosts:
+- {host: docs.topl.co, result: NXDOMAIN, was: the developer documentation site}
+- {host: topl-rpc.docs.topl.co, result: NXDOMAIN, was: the 1.x Topl RPC reference}
+- {host: brambldart.docs.topl.co, result: NXDOMAIN, was: the BramblDart SDK documentation}
+- {host: bcarbon.topl.co, result: NXDOMAIN, was: the bCarbon impact-token application}
+- {host: topl.services, result: NXDOMAIN, was: the Topl BaaS API console}
+- {host: docs.apparatus.live, result: NXDOMAIN, was: the post-rebrand documentation site (per Knowledge-Base static/CNAME)}
+- {host: legal.apparatus.live, result: NXDOMAIN, was: the legal agreements site}
+- {host: testnet.topl.tech, result: NXDOMAIN, was: the documented public testnet gRPC endpoint}
+- {host: testnet.topl.co, result: NXDOMAIN, was: the public testnet endpoint named in an earlier revision of the quickstart}

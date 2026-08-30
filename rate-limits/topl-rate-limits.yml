@@ -1,0 +1,20 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  Searched the archived developer documentation (github.com/Topl/Knowledge-Base) and every
+  reachable Topl/Apparatus host on 2026-08-30 for published limits. None documented.
+name: Topl / Apparatus rate limits
+limit_count: 0
+limits: []
+response_headers: []
+exhaustion_status: null
+note: >-
+  No rate limits were ever published, and no rate-limit response signal is declared in the
+  protobuf contract. The interface is gRPC rather than REST, so the X-RateLimit-* / RateLimit-*
+  / Retry-After header family does not apply; a gRPC service would signal exhaustion with
+  RESOURCE_EXHAUSTED, but no Topl document states that it did. Nothing could be observed
+  live: the documented public endpoint testnet.topl.tech:443 returned NXDOMAIN when probed on
+  2026-08-30.
+evidence:
+- {url: 'https://testnet.topl.tech', status: 0, note: NXDOMAIN}
+- {url: 'https://github.com/Topl/Knowledge-Base', status: 200, note: 'archived docs — no rate-limit page'}

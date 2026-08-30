@@ -1,0 +1,22 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  Searched every host historically associated with this company for a pricing or plans page on
+  2026-08-30. topl.co is no longer owned by the company (re-registered 2024-12-30) and serves
+  unrelated content; apparatus.live did not answer; topl.services, docs.topl.co and
+  docs.apparatus.live return NXDOMAIN. No pricing page survives anywhere reachable, and none
+  appears in the archived documentation repository.
+name: Topl / Apparatus plans and pricing
+plan_count: 0
+plans: []
+note: >-
+  No plans, tiers or prices could be found. This is not a "contact us" gate — it is the absence
+  of any reachable commercial surface at all. In the period when the platform was running, the
+  developer surface was an open blockchain node plus a testnet faucet
+  (toplprotocol/faucet on Docker Hub), which is consistent with there having been no metered
+  API pricing to publish; but no page stating that survives, so nothing further is asserted.
+evidence:
+- {url: 'https://apparatus.live/', status: 0, note: 'connection timed out — no response'}
+- {url: 'https://topl.services/', status: 0, note: NXDOMAIN}
+- {url: 'https://docs.topl.co/', status: 0, note: NXDOMAIN}
+- {url: 'https://topl.co/', status: 200, note: 'domain re-registered 2024-12-30; unrelated third-party content'}

@@ -1,0 +1,52 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  No MCP server exists. Searched the Topl GitHub organization (10 public repositories, all
+  archived), npm, and every reachable Topl/Apparatus host on 2026-08-30; nothing MCP-shaped was
+  found. The candidate tool list below is DERIVED from the read-only RPCs in the published
+  protobuf contract (grpc/) and is API Evangelist's own construction, not a Topl product.
+name: Topl / Apparatus MCP candidate
+status: candidate
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: derived
+note: >-
+  Nobody ships an MCP server for this API, and one could not usefully be run today: the
+  documented public gRPC endpoint (testnet.topl.tech:443) returned NXDOMAIN when probed on
+  2026-08-30, so any server built from this contract would need a self-hosted
+  toplprotocol/bifrost-node behind it. No endpoint URL is invented here.
+candidate_tools:
+- {tool: get_block_by_id, rpc: co.topl.genus.services.BlockService.getBlockById, kind: read}
+- {tool: get_block_by_height, rpc: co.topl.genus.services.BlockService.getBlockByHeight, kind: read}
+- {tool: get_block_by_depth, rpc: co.topl.genus.services.BlockService.getBlockByDepth, kind: read}
+- {tool: get_transaction_by_id, rpc: co.topl.genus.services.TransactionService.getTransactionById, kind: read}
+- {tool: get_txos_by_lock_address, rpc: co.topl.genus.services.TransactionService.getTxosByLockAddress, kind: read}
+- {tool: get_txos_by_asset_label, rpc: co.topl.genus.services.TransactionService.getTxosByAssetLabel, kind: read, note: server-streaming}
+- {tool: get_group_policy, rpc: co.topl.genus.services.TokenService.getGroupPolicy, kind: read}
+- {tool: get_series_policy, rpc: co.topl.genus.services.TokenService.getSeriesPolicy, kind: read}
+- {tool: get_txo_stats, rpc: co.topl.genus.services.NetworkMetricsService.getTxoStats, kind: read}
+- {tool: get_block_stats, rpc: co.topl.genus.services.NetworkMetricsService.getBlockStats, kind: read}
+- {tool: get_blockchain_size_stats, rpc: co.topl.genus.services.NetworkMetricsService.getBlockchainSizeStats, kind: read}
+- {tool: fetch_block_header, rpc: co.topl.node.services.NodeRpc.FetchBlockHeader, kind: read}
+- {tool: fetch_block_body, rpc: co.topl.node.services.NodeRpc.FetchBlockBody, kind: read}
+- {tool: fetch_transaction, rpc: co.topl.node.services.NodeRpc.FetchTransaction, kind: read}
+- {tool: fetch_block_id_at_height, rpc: co.topl.node.services.NodeRpc.FetchBlockIdAtHeight, kind: read}
+- {tool: fetch_epoch_data, rpc: co.topl.node.services.NodeRpc.FetchEpochData, kind: read}
+- {tool: current_mempool, rpc: co.topl.node.services.NodeRpc.CurrentMempool, kind: read}
+- {tool: node_health_check, rpc: grpc.health.v1.Health.Check, kind: read}
+excluded_from_candidates:
+- rpc: co.topl.node.services.NodeRpc.BroadcastTransaction
+  reason: >-
+    Irreversible write. Broadcasting a signed transaction is final with no cancel path
+    (conventions/topl-conventions.yml reversibility), so it is deliberately not offered as a
+    candidate agent tool.
+- rpc: co.topl.genus.services.TransactionService.dropIndex
+  reason: Destructive indexer operation.
+input_schemas: >-
+  Each candidate tool would inherit its request message from grpc/ as its input schema — e.g.
+  get_txos_by_lock_address takes QueryByLockAddressRequest from grpc/genus/genus_rpc.proto.
+  Schemas are not restated here; the contract is the source.

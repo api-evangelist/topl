@@ -1,0 +1,107 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  Derived from the protobuf contract in grpc/ and from Topl's archived developer documentation
+  (github.com/Topl/Knowledge-Base). Nothing here is asserted from a page that no longer serves.
+name: Topl / Apparatus cross-cutting API conventions
+description: >-
+  Runtime semantics of the Apparatus (Topl) node and Genus indexer gRPC surface, as they can be
+  read out of the published contract.
+transport:
+  protocol: gRPC over HTTP/2
+  serialization: protobuf (proto3)
+  documented_public_endpoint: 'testnet.topl.tech:443 with TLS (--secure), per the archived quickstart'
+  endpoint_status: 'NXDOMAIN when probed 2026-08-30 — the endpoint no longer exists'
+  self_hosting: 'docker run --rm -p 9085:9085 -p 9084:9084 docker.io/toplprotocol/bifrost-node:<version>'
+authentication:
+  api_level: none
+  note: >-
+    The node RPC exposes no API key, bearer token, or OAuth scheme. Authorization is
+    cryptographic and happens inside the transaction, not at the transport: a TxO is locked by
+    a Quivr Proposition and unlocked by a matching Proof
+    (grpc/quivr/models/proposition.proto, grpc/quivr/models/proof.proto,
+    grpc/brambl/models/box/attestation.proto). See authentication/topl-authentication.yml.
+pagination:
+  style: server-streaming
+  note: >-
+    No offset, cursor or limit fields exist in the Genus request messages. Bulk reads are
+    delivered as gRPC server streams instead — getTxosByLockAddressStream,
+    getTransactionByLockAddressStream, getTxosByAssetLabel, getIndexedTransactions,
+    SynchronizationTraversal, FetchNodeConfig.
+error_model:
+  envelope: gRPC status codes and status details
+  note: >-
+    No error message type is declared in the contract and no error reference page survives on
+    any reachable host, so no error catalog could be derived. errors/ is deliberately absent
+    rather than invented.
+rate_limit_signaling:
+  headers: none documented
+  note: See rate-limits/topl-rate-limits.yml — no limits were ever published.
+request_tracing:
+  correlation_id: none in contract
+versioning:
+  scheme: 'semver on the SDK and node artifacts (2.0.0-betaN); the protobuf packages are unversioned (co.topl.node.services, not v1)'
+  in_contract: false
+  note: >-
+    The protobuf packages carry no version segment, so a breaking change to a message would
+    have had no wire-level signal. Only grpc.health.v1 — the vendored gRPC standard — is
+    version-qualified.
+field_expansion: not supported
+metadata: >-
+  Arbitrary application metadata rides on-ledger rather than in the API envelope: the Brambl
+  data model carries a Datum and a google.protobuf.Struct on assets
+  (grpc/brambl/models/datum.proto, grpc/brambl/models/box/asset.proto).
+idempotency:
+  supported: false
+  header: null
+  grade: na
+  note: >-
+    No idempotency key exists in any request message. Double-submission is instead prevented by
+    the ledger itself — a transaction consumes specific transaction outputs and a second
+    application of the same transaction is rejected as a double spend. This is a real property
+    of the system but it is not an API idempotency control, so it is recorded as `na` rather
+    than as support.
+dry_run_mode:
+  supported: false
+  grade: na
+  note: >-
+    No validate-only or simulate flag appears on BroadcastTransaction. The nearest published
+    rehearsal path is running a private node from the toplprotocol/bifrost-node container,
+    which is an environment, not a dry-run mode.
+reversibility:
+  grade: none
+  applies: true
+  note: >-
+    The contract has exactly one write surface and it has no reversal. NodeRpc.BroadcastTransaction
+    (grpc/node/services/bifrost_rpc.proto) submits a signed transaction to the network; no
+    cancel, void, reverse, undo, rollback or restore RPC exists anywhere in the 30 published
+    RPCs. Once a transaction is included in a block it is final by design — that is what a
+    proof-of-stake ledger is for — and no reachable Topl document states any window, grace
+    period or reversal procedure. NO WINDOW IS ASSERTED HERE because none was published.
+  write_surfaces:
+  - operation: NodeRpc.BroadcastTransaction
+    file: grpc/node/services/bifrost_rpc.proto
+    reversal_operation: null
+    window: null
+    docs: null
+    note: >-
+      Before inclusion, a transaction is visible in the mempool
+      (NodeRpc.CurrentMempool, NodeRpc.CurrentMempoolContains) — an agent can observe that a
+      submission is still pending, but the contract offers no operation to withdraw it.
+  - operation: TransactionService.createOnChainTransactionIndex
+    file: grpc/genus/genus_rpc.proto
+    reversal_operation: TransactionService.dropIndex
+    window: null
+    docs: null
+    grade: documented
+    note: >-
+      The one genuine reversal in the contract, and it is an indexer-local operation, not a
+      ledger one: an index created on the Genus indexer can be dropped again. No window is
+      stated, so this grades `documented` and not `verified`.
+cross_references:
+  authentication: authentication/topl-authentication.yml
+  lifecycle: lifecycle/topl-lifecycle.yml
+  conformance: conformance/topl-conformance.yml
+  rate_limits: rate-limits/topl-rate-limits.yml
+  data_model: data-model/topl-data-model.yml
+  contract: grpc/topl-protobuf.yml
