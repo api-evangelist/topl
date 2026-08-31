@@ -64,6 +64,13 @@ apis:
   - Blockchain
   - gRPC
   - Protobuf
+  - Transaction
+  - Blocks
+  - Tokens
+  tags_raw:
+  - Blockchain
+  - gRPC
+  - Protobuf
   - Transactions
   - Blocks
   - Tokens
