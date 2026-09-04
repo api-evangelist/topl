@@ -14,6 +14,19 @@ description: >-
   contract itself: a 38-file proto3 module defining 6 gRPC services, 30 RPCs and 138 messages,
   still downloadable from the Buf Schema Registry, plus the published SDKs and container images.
 url: https://raw.githubusercontent.com/api-evangelist/topl/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: open
+  trial: false
+  try_now: false
+  public: true
+  label: Open access
+  confidence: low
+  source:
+  - authentication
+  - rate-limits
+  generated: '2026-09-02'
+  method: derived
 image: https://raw.githubusercontent.com/Topl/Knowledge-Base/main/static/img/apparatus-logo.svg
 x-type: company
 x-source: harvest:secondary-market
