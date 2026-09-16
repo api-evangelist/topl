@@ -1,18 +1,16 @@
 aid: topl
 name: Topl
-description: >-
-  Topl was an impact-technology company founded in 2017 out of Rice University and based in
-  Houston, Texas, building a proof-of-stake blockchain that let organizations prove ethical and
-  sustainable practices on-ledger. It raised a $3M seed in 2020 and a $15M Series A in 2022,
-  and shipped a real developer platform: the Bifrost node, the Genus indexer, the Brambl SDK
-  family for Scala, TypeScript, JavaScript and Dart, and the brambl-cli client. In late 2023 the
-  company rebranded to Apparatus and repositioned around Thunder, a Bitcoin Layer 2. It appears
-  to have wound down after that — the last first-party artifact of any kind shipped on
-  2024-09-26, all ten remaining public repositories are archived, every documentation and API
-  host now fails to resolve, and the topl.co domain lapsed and was re-registered by an
-  unrelated owner on 2024-12-30. What survives, and what this profile is built from, is the
-  contract itself: a 38-file proto3 module defining 6 gRPC services, 30 RPCs and 138 messages,
-  still downloadable from the Buf Schema Registry, plus the published SDKs and container images.
+description: 'Topl was an impact-technology company founded in 2017 out of Rice University and based in
+  Houston, Texas, building a proof-of-stake blockchain that let organizations prove ethical and sustainable
+  practices on-ledger. It raised a $3M seed in 2020 and a $15M Series A in 2022, and shipped a real developer
+  platform: the Bifrost node, the Genus indexer, the Brambl SDK family for Scala, TypeScript, JavaScript
+  and Dart, and the brambl-cli client. In late 2023 the company rebranded to Apparatus and repositioned
+  around Thunder, a Bitcoin Layer 2. It appears to have wound down after that — the last first-party artifact
+  of any kind shipped on 2024-09-26, all ten remaining public repositories are archived, every documentation
+  and API host now fails to resolve, and the topl.co domain lapsed and was re-registered by an unrelated
+  owner on 2024-12-30. What survives, and what this profile is built from, is the contract itself: a 38-file
+  proto3 module defining 6 gRPC services, 30 RPCs and 138 messages, still downloadable from the Buf Schema
+  Registry, plus the published SDKs and container images.'
 url: https://raw.githubusercontent.com/api-evangelist/topl/refs/heads/main/apis.yml
 accessModel:
   pricing: unknown
@@ -34,16 +32,15 @@ x-tier: profiled
 x-tier-reason: enrichment
 x-also-known-as: Apparatus
 x-secondary-market-listing: https://www.nasdaqprivatemarket.com/
-x-secondary-market-listing-note: >-
-  The harvest source. Deliberately NOT wired as a Website pointer — a trading-venue listing page
-  is not a company web presence (roadmap#56). Topl has no live web presence: apparatus.live does
-  not answer and topl.co is no longer theirs.
+x-secondary-market-listing-note: 'The harvest source. Deliberately NOT wired as a Website pointer — a
+  trading-venue listing page is not a company web presence (roadmap#56). Topl has no live web presence:
+  apparatus.live does not answer and topl.co is no longer theirs.'
 specificationVersion: '0.20'
 x-status: defunct
-x-status-detail: Wound down; no first-party site resolves. Tracked as a secondary-market
-  entity only. No Website registered on purpose.
+x-status-detail: Wound down; no first-party site resolves. Tracked as a secondary-market entity only.
+  No Website registered on purpose.
 created: '2026-08-30'
-modified: '2026-08-30'
+modified: '2026-09-15'
 tags:
 - Company
 - Blockchain
@@ -56,23 +53,22 @@ tags:
 - Impact
 - Tokenization
 - Wound Down
+- Defunct
 apis:
 - aid: topl:apparatus-node
   name: Apparatus (Topl) Node and Genus gRPC API
-  description: >-
-    The gRPC interface to the Apparatus (Topl) blockchain: NodeRpc on the Bifrost full node for
-    submitting transactions, reading blocks and following the chain tip, and the Genus indexer's
-    BlockService, TransactionService, NetworkMetricsService and TokenService for querying blocks,
-    transactions, transaction outputs, network statistics and token policies. The node also
-    implements the standard gRPC Health Checking Protocol. The contract is published and still
-    downloadable; the service is not running.
+  description: 'The gRPC interface to the Apparatus (Topl) blockchain: NodeRpc on the Bifrost full node
+    for submitting transactions, reading blocks and following the chain tip, and the Genus indexer''s
+    BlockService, TransactionService, NetworkMetricsService and TokenService for querying blocks, transactions,
+    transaction outputs, network statistics and token policies. The node also implements the standard
+    gRPC Health Checking Protocol. The contract is published and still downloadable; the service is not
+    running.'
   humanURL: https://github.com/Topl/Knowledge-Base
   baseURL: https://testnet.topl.tech
-  x-baseurl-status: >-
-    NXDOMAIN when probed 2026-08-30. This is the base the archived quickstart documents
-    ("The host is testnet.topl.tech and the port is 443", with --secure for TLS); it is recorded
-    because it is what the provider published, not because it answers. A node can still be run
-    locally from docker.io/toplprotocol/bifrost-node on ports 9084/9085.
+  x-baseurl-status: NXDOMAIN when probed 2026-08-30. This is the base the archived quickstart documents
+    ("The host is testnet.topl.tech and the port is 443", with --secure for TLS); it is recorded because
+    it is what the provider published, not because it answers. A node can still be run locally from docker.io/toplprotocol/bifrost-node
+    on ports 9084/9085.
   tags:
   - Blockchain
   - gRPC
@@ -142,34 +138,44 @@ common:
   url: llms/topl-llms.txt
 x-pointer-liveness:
   checked: '2026-08-30'
-  note: >-
-    Every external pointer above was fetched with a browser User-Agent on 2026-08-30 and
-    returned 200. The Website pointer that this repo previously carried
-    (https://www.nasdaqprivatemarket.com/) was REMOVED: it is the secondary-market venue this
-    company was harvested from, not Topl's own site, and crediting it as a web presence is
-    false credit (roadmap#56).
+  note: 'Every external pointer above was fetched with a browser User-Agent on 2026-08-30 and returned
+    200. The Website pointer that this repo previously carried (https://www.nasdaqprivatemarket.com/)
+    was REMOVED: it is the secondary-market venue this company was harvested from, not Topl''s own site,
+    and crediting it as a web presence is false credit (roadmap#56).'
   probes:
-  - {url: 'https://github.com/Topl', status: 200}
-  - {url: 'https://github.com/Topl/Knowledge-Base', status: 200}
-  - {url: 'https://buf.build/seanattopl/topl-protobuf-specs', status: 200}
-  - {url: 'https://central.sonatype.com/namespace/co.topl', status: 200}
-  - {url: 'https://hub.docker.com/u/toplprotocol', status: 200}
+  - url: https://github.com/Topl
+    status: 200
+  - url: https://github.com/Topl/Knowledge-Base
+    status: 200
+  - url: https://buf.build/seanattopl/topl-protobuf-specs
+    status: 200
+  - url: https://central.sonatype.com/namespace/co.topl
+    status: 200
+  - url: https://hub.docker.com/u/toplprotocol
+    status: 200
 x-not-published:
-  note: >-
-    Deliberately absent. Each of these was probed and missed; nothing is stubbed to fill a slot.
-  well_known: 'Every /.well-known path returned 404 on topl.co (not their domain) and no response on apparatus.live. Probe recorded in well-known/topl-well-known.yml; NO WellKnown pointer emitted.'
-  agent_card: 'No /.well-known/agent-card.json or /.well-known/agent.json on any host. a2a/ is empty by design.'
-  mcp_server: 'No MCP server exists. mcp/topl-mcp.yml records a derived candidate with deployment.mode: none and is NOT wired as an MCPServer pointer.'
-  openapi: 'No OpenAPI or Swagger document was found on any host. The contract this provider published is protobuf, and it is saved in grpc/.'
-  asyncapi: 'No event or streaming contract beyond the gRPC server-streaming RPCs already in grpc/.'
-  graphql: 'No GraphQL surface.'
-  wsdl: 'No SOAP surface.'
-  skills: 'No OpenAPI to ground agent skills in, and no provider-published skills or AGENTS.md.'
-  errors: 'gRPC status codes only; no error reference survives on any reachable host, so no error catalog is asserted.'
-  scopes: 'No OAuth scheme, so no scopes to derive.'
-  security_programs: 'No security.txt, bug bounty page or trust center reachable. Domain security was NOT probed: topl.co has been owned by a third party since 2024-12-30, and measuring its TLS/DNS posture would attribute a stranger to Topl.'
-  status_page: 'None found.'
-  sandbox: 'The testnet and its faucet are gone; toplprotocol/faucet remains on Docker Hub but there is no network for it to fund.'
+  note: Deliberately absent. Each of these was probed and missed; nothing is stubbed to fill a slot.
+  well_known: Every /.well-known path returned 404 on topl.co (not their domain) and no response on apparatus.live.
+    Probe recorded in well-known/topl-well-known.yml; NO WellKnown pointer emitted.
+  agent_card: No /.well-known/agent-card.json or /.well-known/agent.json on any host. a2a/ is empty by
+    design.
+  mcp_server: 'No MCP server exists. mcp/topl-mcp.yml records a derived candidate with deployment.mode:
+    none and is NOT wired as an MCPServer pointer.'
+  openapi: No OpenAPI or Swagger document was found on any host. The contract this provider published
+    is protobuf, and it is saved in grpc/.
+  asyncapi: No event or streaming contract beyond the gRPC server-streaming RPCs already in grpc/.
+  graphql: No GraphQL surface.
+  wsdl: No SOAP surface.
+  skills: No OpenAPI to ground agent skills in, and no provider-published skills or AGENTS.md.
+  errors: gRPC status codes only; no error reference survives on any reachable host, so no error catalog
+    is asserted.
+  scopes: No OAuth scheme, so no scopes to derive.
+  security_programs: 'No security.txt, bug bounty page or trust center reachable. Domain security was
+    NOT probed: topl.co has been owned by a third party since 2024-12-30, and measuring its TLS/DNS posture
+    would attribute a stranger to Topl.'
+  status_page: None found.
+  sandbox: The testnet and its faucet are gone; toplprotocol/faucet remains on Docker Hub but there is
+    no network for it to fund.
 x-enrichment:
   date: '2026-08-30'
   status: enriched
@@ -178,12 +184,11 @@ x-enrichment:
 x-coverage:
   state: covered
   reason: contract-recovered
-  detail: >-
-    The company is wound down — apparatus.live does not answer, docs.topl.co / docs.apparatus.live
-    / topl.services / testnet.topl.tech all return NXDOMAIN, all ten remaining GitHub repos are
-    archived, and topl.co was re-registered by an unrelated owner on 2024-12-30 — but the full
-    38-file protobuf contract is still published on the Buf Schema Registry and was recovered
-    verbatim, so this profile is built on a real first-party contract rather than on an absence.
+  detail: The company is wound down — apparatus.live does not answer, docs.topl.co / docs.apparatus.live
+    / topl.services / testnet.topl.tech all return NXDOMAIN, all ten remaining GitHub repos are archived,
+    and topl.co was re-registered by an unrelated owner on 2024-12-30 — but the full 38-file protobuf
+    contract is still published on the Buf Schema Registry and was recovered verbatim, so this profile
+    is built on a real first-party contract rather than on an absence.
   evidence:
   - url: https://buf.build/seanattopl/topl-protobuf-specs
     status: 200
